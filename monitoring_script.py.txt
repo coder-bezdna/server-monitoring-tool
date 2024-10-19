@@ -1,0 +1,25 @@
+import os
+import platform
+
+def ping_device(ip_address):
+    # Проверяем операционную систему для правильной команды пинга
+    command = "ping -n 1 " + ip_address if platform.system().lower() == "windows" else "ping -c 1 " + ip_address
+    response = os.system(command)
+
+    # Проверяем результат команды пинга
+    if response == 0:
+        print(f"{ip_address} is online")
+    else:
+        print(f"{ip_address} is offline")
+
+def main():
+    # Список IP-адресов для мониторинга
+    ip_addresses = ["8.8.8.8", "192.168.1.1", "192.168.0.100"]  # Можешь заменить на свои IP
+    print("Monitoring devices:")
+    
+    # Пингуем каждый IP-адрес
+    for ip in ip_addresses:
+        ping_device(ip)
+
+if __name__ == "__main__":
+    main()
